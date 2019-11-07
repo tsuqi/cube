@@ -20,16 +20,15 @@ namespace Cube
             _socket = new Socket(_localEP.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
-        public void Run()
+        public Task Run()
         {
             _socket.Bind(_localEP);
             _socket.Listen(10);
 
             Console.WriteLine("TCP Server listenting...");
-            while (true)
-            {
-                _socket.BeginAccept(new System.AsyncCallback(AcceptSocket), _socket);
-            }
+            _socket.BeginAccept(new AsyncCallback(AcceptSocket), _socket);
+
+            return Task.CompletedTask;
         }
 
         private void AcceptSocket(IAsyncResult ar)
@@ -40,6 +39,8 @@ namespace Cube
             Console.WriteLine("Incoming TCP socket accepted!");
             state.Socket.BeginReceive(state.Buffer, 0, MPEGState.BufferSize, 0,
                 new AsyncCallback(OnIncomingData), state);
+
+            _socket.BeginAccept(new AsyncCallback(AcceptSocket), _socket);
         }
 
         private void OnIncomingData(IAsyncResult ar)
