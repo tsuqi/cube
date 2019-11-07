@@ -36,6 +36,8 @@ namespace Cube
             }
 
             app.UseWebSockets();
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
             app.UseMvc();
         }
     }
