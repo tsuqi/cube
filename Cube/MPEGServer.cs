@@ -23,7 +23,6 @@ namespace Cube
             while (true)
             {
                 var res = _server.Receive(ref groupEP);
-               // Console.WriteLine("Received data");
                 OnData?.Invoke(this, res);
             }
         }

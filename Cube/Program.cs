@@ -13,12 +13,13 @@ namespace Cube
 { 
     public class Program
     {
-        public static MPEGTCPServer MPEGServer = new MPEGTCPServer();
+        public static MPEGServer MPEGServer = new MPEGServer();
 
         public static async Task Main(string[] args)
         {
-            await Task.Run(async () => await MPEGServer.Run())
-                .ConfigureAwait(false);
+            Task.Run(() => MPEGServer.Run());
+         //   await Task.Run(async () => await MPEGServer.Run())
+          //      .ConfigureAwait(false);
             CreateWebHostBuilder(args).Build().Run();
         }
 
