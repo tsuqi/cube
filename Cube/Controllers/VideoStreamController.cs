@@ -63,6 +63,7 @@ namespace Cube.Controllers
                         break;
                 }
 
+                Console.WriteLine("normal closure");
                 await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed due to client closing", cts.Token);
             }
             catch (WebSocketException ex)
@@ -71,11 +72,13 @@ namespace Cube.Controllers
                 {
                     case WebSocketError.ConnectionClosedPrematurely:
                     default:
+                Console.WriteLine("not so normal closure");
                         _sockets.Remove(ws);
                         return;
                 }
             }
 
+                Console.WriteLine("eos closure");
             _sockets.Remove(ws);
             return;
         }
