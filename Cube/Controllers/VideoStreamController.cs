@@ -12,6 +12,7 @@ namespace Cube.Controllers
     [ApiController]
     public class VideoStreamController : ControllerBase
     {
+        //reminder everything in this project needs to go into src/Cube
         // this controller is responsible for handling clients that are looking at the video stream
         private readonly ILogger _logger;
         private readonly static HashSet<WebSocket> _sockets = new HashSet<WebSocket>();
