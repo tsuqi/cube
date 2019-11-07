@@ -49,7 +49,7 @@ namespace Cube
             int read = handler.EndReceive(ar);
             if (read > 0)
             {
-                this.OnData(state.Buffer);
+                OnData?.Invoke(this, state.Buffer);
                 handler.BeginReceive(state.Buffer, 0, MPEGState.BufferSize, 0,
                     new AsyncCallback(OnIncomingData), state);
             }
