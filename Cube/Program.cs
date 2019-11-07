@@ -17,7 +17,7 @@ namespace Cube
 
         public static void Main(string[] args)
         {
-            Task.Run(() => MPEGServer.Run());
+            Task.Run(async () => MPEGServer.Run());
             CreateWebHostBuilder(args).Build().Run();
         }
 
