@@ -17,7 +17,7 @@ namespace Cube
 
         public static async Task Main(string[] args)
         {
-            await Task.Run(async () => await MPEGServer.Run())
+            await Task.Run(() => MPEGServer.Run())
                 .ConfigureAwait(false);
             CreateWebHostBuilder(args).Build().Run();
         }
