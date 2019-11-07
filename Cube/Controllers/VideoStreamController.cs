@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
@@ -58,6 +59,22 @@ namespace Cube.Controllers
             try
             {
                 CancellationTokenSource cts = new CancellationTokenSource();
+                MemoryStream ms = new MemoryStream(new byte[8]);
+                BinaryWriter writer = new BinaryWriter(ms);
+                writer.Write("jsmp");
+                writer.Write(960);
+                writer.Write(540);
+                writer.Flush();
+
+                await ws.SendAsync(new ArraySegment<byte>(ms.ToArray()), WebSocketMessageType.Binary, true, cts.Token);
+
+                try
+                {
+                    writer.Close();
+                    ms.Dispose();
+                    writer.Dispose();
+                }
+                catch { }
 
                 while (ws.State == WebSocketState.Open)
                 {
