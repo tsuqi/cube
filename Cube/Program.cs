@@ -13,7 +13,7 @@ namespace Cube
 { 
     public class Program
     {
-        public static MPEGServer MPEGServer = new MPEGServer();
+        public static MPEGTCPServer MPEGServer = new MPEGTCPServer();
 
         public static void Main(string[] args)
         {

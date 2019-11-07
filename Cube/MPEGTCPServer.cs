@@ -15,9 +15,9 @@ namespace Cube
         public MPEGTCPServer()
         {
             IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());
-            _localEP = new IPEndPoint(ipHostInfo.AddressList[0], 7080);
+            _localEP = new IPEndPoint(IPAddress.Any, 11000);
 
-            _socket = new Socket(_localEP.Address.AddressFamily, SocketType.Stream, ProtocolType.Udp);
+            _socket = new Socket(_localEP.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
         public void Run()
@@ -25,7 +25,7 @@ namespace Cube
             _socket.Bind(_localEP);
             _socket.Listen(10);
 
-            Console.WriteLine("UDP Server listenting...");
+            Console.WriteLine("TCP Server listenting...");
             while(true)
             {
                 _socket.BeginAccept(new System.AsyncCallback(AcceptSocket), _socket);
@@ -37,7 +37,7 @@ namespace Cube
             MPEGState state = new MPEGState();
             state.Socket = _socket.EndAccept(ar);
 
-            Console.WriteLine("Incoming UDP socket accepted!");
+            Console.WriteLine("Incoming TCP socket accepted!");
             state.Socket.BeginReceive(state.Buffer, 0, MPEGState.BufferSize, 0,
                 new AsyncCallback(OnIncomingData), state);
         }
