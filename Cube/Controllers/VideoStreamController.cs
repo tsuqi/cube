@@ -37,11 +37,11 @@ namespace Cube.Controllers
         }
 
         [Route("/api/_internal/stream")]
-        public async Task StreamAsync()
+        public async Task<IActionResult> StreamAsync()
         {
             if(!HttpContext.WebSockets.IsWebSocketRequest)
             {
-                return;
+                return NotFound();
             }
 
             // authentication code.
@@ -61,10 +61,10 @@ namespace Cube.Controllers
                     var response = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
                     if (response.MessageType == WebSocketMessageType.Close)
                     {
+                        _sockets.Remove(ws);
                         await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed due to client closing", cts.Token);
                     }
                 }
-
             }
             catch (WebSocketException ex)
             {
@@ -73,12 +73,11 @@ namespace Cube.Controllers
                     case WebSocketError.ConnectionClosedPrematurely:
                     default:
                         _sockets.Remove(ws);
-                        return;
+                        break;
                 }
             }
 
-            _sockets.Remove(ws);
-            return;
+            return BadRequest();
         }
     }
 }

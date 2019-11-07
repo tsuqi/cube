@@ -49,8 +49,8 @@
         // Setup the WebSocket connection and start the player
 
         var canvas = document.getElementById('videoCanvas');
-        var ws = new WebSocket('ws://' + window.location.host + '/api/_internal/stream');
-        var player = new jsmpeg(ws, { canvas: canvas });
+        var url = 'ws://' + window.location.host + '/api/_internal/stream';
+        var player = new JSMpeg.Player(url, { canvas: canvas });
     </script>
 </body>
 
