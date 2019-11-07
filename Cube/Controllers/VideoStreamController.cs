@@ -31,7 +31,8 @@ namespace Cube.Controllers
                 {
                     foreach(var ws in _sockets)
                     {
-                        await ws.SendAsync(new ArraySegment<byte>(data), WebSocketMessageType.Binary, true, new CancellationTokenSource().Token);
+                        await ws.SendAsync(new ArraySegment<byte>(data), WebSocketMessageType.Binary, 
+                            true, new CancellationTokenSource().Token);
                     }
                 });
             };

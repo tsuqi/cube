@@ -46,8 +46,8 @@
         var url = 'ws://' + window.location.host + '/api/_internal/stream';
         var player = new JSMpeg.Player(url, {
             canvas: canvas,
-            videoBufferSize: 1200 * 1024,
-            audioBufferSize: 128 * 1024
+            audio: false,
+            videoBufferSize: 1000 * 1024
         });
     </script>
 </body>
