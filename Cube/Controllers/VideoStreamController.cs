@@ -72,7 +72,7 @@ namespace Cube.Controllers
                 {
                     case WebSocketError.ConnectionClosedPrematurely:
                     default:
-                Console.WriteLine("not so normal closure");
+                Console.WriteLine(ex.ToString());
                         _sockets.Remove(ws);
                         return;
                 }
