@@ -45,6 +45,10 @@ namespace Cube.Controllers
             }
 
             // authentication code.
+            if(Request.Headers["Sec-WebSocket-Protocol"].FirstOrDefault() != null)
+            {
+                Response.Headers["Sec-WebSocket-Protocol"] = "null";
+            }
 
             var ws = await HttpContext.WebSockets.AcceptWebSocketAsync();
             _sockets.Add(ws);
