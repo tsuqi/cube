@@ -59,23 +59,16 @@ namespace Cube.Controllers
             try
             {
                 CancellationTokenSource cts = new CancellationTokenSource();
-                MemoryStream ms = new MemoryStream(new byte[8]);
-                BinaryWriter writer = new BinaryWriter(ms);
-                writer.Write("jsmp");
-                writer.Write(960);
-                writer.Write(540);
-                writer.Flush();
 
-                await ws.SendAsync(new ArraySegment<byte>(ms.ToArray()), WebSocketMessageType.Binary, true, cts.Token);
-
-                try
+                using (MemoryStream ms = new MemoryStream())
+                using (BinaryWriter writer = new BinaryWriter(ms))
                 {
-                    writer.Close();
-                    ms.Dispose();
-                    writer.Dispose();
+                    writer.Write("jsmp");
+                    writer.Write(960);
+                    writer.Write(540);
+                    await ws.SendAsync(new ArraySegment<byte>(ms.ToArray()), WebSocketMessageType.Binary, true, cts.Token);
                 }
-                catch { }
-
+                
                 while (ws.State == WebSocketState.Open)
                 {
                     byte[] buffer = new byte[1024];
