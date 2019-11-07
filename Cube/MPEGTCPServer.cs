@@ -65,7 +65,7 @@ namespace Cube
     public class MPEGState
     {
         public Socket Socket = null;
-        public const int BufferSize = 1500 * 1024;
+        public const int BufferSize = 1200 * 1024;
         public byte[] Buffer = new byte[BufferSize];
     }
 }

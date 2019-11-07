@@ -37,22 +37,16 @@
 
 <body>
     <div class="container">
-        <canvas id="videoCanvas" width="100%" height="100%">
-            <p>
-                Your browser big gay has
-            </p>
-        </canvas>
+        <canvas id="videoCanvas" width="1020" height="720"></canvas>
     </div>
 
     <script type="text/javascript" src="https://bin.moe/s/jsmpeg.min.js"></script>
     <script>
-        // Setup the WebSocket connection and start the player
-
         var canvas = document.getElementById('videoCanvas');
         var url = 'ws://' + window.location.host + '/api/_internal/stream';
         var player = new JSMpeg.Player(url, {
             canvas: canvas,
-            videoBufferSize: 1024*1024*4,
+            videoBufferSize: 1200 * 1024,
             audioBufferSize: 128 * 1024
         });
     </script>
