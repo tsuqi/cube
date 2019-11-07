@@ -9,8 +9,7 @@ namespace Cube
         private readonly Socket _socket;
         private readonly IPEndPoint _localEP;
 
-        public event OnDataEvent OnData;
-        public delegate void OnDataEvent(byte[] data);
+        public event EventHandler<byte[]> OnData;
 
         public MPEGTCPServer()
         {
