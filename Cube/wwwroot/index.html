@@ -44,13 +44,12 @@
         </canvas>
     </div>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsmpeg/0.2/jsmpg.min.js"></script>
+    <script type="text/javascript" src="https://bin.moe/s/jsmpeg.min.js"></script>
     <script>
         // Setup the WebSocket connection and start the player
-        var client = new WebSocket('ws://' + window.location.host + '/api/_internal/stream');
 
         var canvas = document.getElementById('videoCanvas');
-        var player = new jsmpeg(client, { canvas: canvas });
+        var player = new JSMpeg.Player('ws://' + window.location.host + '/api/_internal/stream', { canvas: canvas });
     </script>
 </body>
 
