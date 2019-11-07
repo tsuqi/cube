@@ -10,15 +10,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Cube
-{
+{ 
     public class Program
     {
         public static MPEGServer MPEGServer = new MPEGServer();
 
         public static async Task Main(string[] args)
         {
-            await Task.Run(() => MPEGServer.Run())
-                .ConfigureAwait(false);
+            Task.Run(() => MPEGServer.Run());
+         //   await Task.Run(async () => await MPEGServer.Run())
+          //      .ConfigureAwait(false);
             CreateWebHostBuilder(args).Build().Run();
         }
 
