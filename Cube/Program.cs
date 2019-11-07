@@ -15,9 +15,9 @@ namespace Cube
     {
         public static MPEGTCPServer MPEGServer = new MPEGTCPServer();
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            Task.Run(MPEGServer.Run).ConfigureAwait(false);
+            await Task.Run(() => MPEGServer.Run()).ConfigureAwait(false);
             CreateWebHostBuilder(args).Build().Run();
         }
 

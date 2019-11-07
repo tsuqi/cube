@@ -26,7 +26,7 @@ namespace Cube
             _socket.Listen(10);
 
             Console.WriteLine("TCP Server listenting...");
-            while(true)
+            while (true)
             {
                 _socket.BeginAccept(new System.AsyncCallback(AcceptSocket), _socket);
             }
