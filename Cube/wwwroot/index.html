@@ -37,7 +37,7 @@
 
 <body>
     <div class="container">
-        <canvas id="videoCanvas" width="640" height="480">
+        <canvas id="videoCanvas" width="100%" height="100%">
             <p>
                 Your browser big gay has
             </p>
@@ -49,10 +49,12 @@
         // Setup the WebSocket connection and start the player
 
         var canvas = document.getElementById('videoCanvas');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
         var url = 'ws://' + window.location.host + '/api/_internal/stream';
-        var player = new JSMpeg.Player(url, { canvas: canvas });
+        var player = new JSMpeg.Player(url, {
+            canvas: canvas,
+            videoBufferSize: 1500 * 1024,
+            audioBufferSize: 1500 * 1024
+        });
     </script>
 </body>
 
