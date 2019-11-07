@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace Cube
 {
@@ -19,7 +20,7 @@ namespace Cube
             _socket = new Socket(_localEP.Address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
-        public void Run()
+        public Task Run()
         {
             _socket.Bind(_localEP);
             _socket.Listen(10);
@@ -29,6 +30,8 @@ namespace Cube
             {
                 _socket.BeginAccept(new System.AsyncCallback(AcceptSocket), _socket);
             }
+
+            return Task.CompletedTask;
         }
 
         private void AcceptSocket(IAsyncResult ar)
