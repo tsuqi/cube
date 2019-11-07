@@ -50,7 +50,7 @@
 
         var canvas = document.getElementById('videoCanvas');
         var ws = new WebSocket('ws://' + window.location.host + '/api/_internal/stream');
-        var player = new JSMpeg.Player(ws, { canvas: canvas });
+        var player = new jsmpeg(ws, { canvas: canvas });
     </script>
 </body>
 

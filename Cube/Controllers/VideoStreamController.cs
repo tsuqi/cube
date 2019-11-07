@@ -60,10 +60,11 @@ namespace Cube.Controllers
                     byte[] buffer = new byte[1024];
                     var response = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
                     if (response.MessageType == WebSocketMessageType.Close)
-                        break;
+                    {
+                        await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed due to client closing", cts.Token);
+                    }
                 }
 
-                await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed due to client closing", cts.Token);
             }
             catch (WebSocketException ex)
             {
