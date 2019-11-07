@@ -55,7 +55,7 @@ namespace Cube.Controllers
             {
                 CancellationTokenSource cts = new CancellationTokenSource();
 
-                while (true)
+                while (ws.State == WebSocketState.Open)
                 {
                     byte[] buffer = new byte[1024];
                     var response = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), cts.Token);
@@ -63,7 +63,6 @@ namespace Cube.Controllers
                         break;
                 }
 
-                Console.WriteLine("normal closure");
                 await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed due to client closing", cts.Token);
             }
             catch (WebSocketException ex)
@@ -72,13 +71,11 @@ namespace Cube.Controllers
                 {
                     case WebSocketError.ConnectionClosedPrematurely:
                     default:
-                Console.WriteLine(ex.ToString());
                         _sockets.Remove(ws);
                         return;
                 }
             }
 
-                Console.WriteLine("eos closure");
             _sockets.Remove(ws);
             return;
         }
